@@ -1,0 +1,1328 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+    V_HOY DATE := TRUNC(SYSDATE);
+    V_TOTAL NUMBER;
+    V_SOCIO_1 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_2 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_3 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_4 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_5 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_6 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_7 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_SOCIO_8 FIDE_SOCIOS_TB.ID_SOCIO%TYPE;
+    V_TIPO_MEM_1 FIDE_TIPOS_MEMBRESIA_TB.ID_TIPO_MEMBRESIA%TYPE;
+    V_TIPO_MEM_2 FIDE_TIPOS_MEMBRESIA_TB.ID_TIPO_MEMBRESIA%TYPE;
+    V_TIPO_MEM_3 FIDE_TIPOS_MEMBRESIA_TB.ID_TIPO_MEMBRESIA%TYPE;
+    V_CAT_1 FIDE_CATEGORIAS_TB.ID_CATEGORIA%TYPE;
+    V_CAT_2 FIDE_CATEGORIAS_TB.ID_CATEGORIA%TYPE;
+    V_CAT_3 FIDE_CATEGORIAS_TB.ID_CATEGORIA%TYPE;
+    V_CAT_4 FIDE_CATEGORIAS_TB.ID_CATEGORIA%TYPE;
+    V_CAT_5 FIDE_CATEGORIAS_TB.ID_CATEGORIA%TYPE;
+    V_PROD_1 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_2 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_3 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_4 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_5 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_6 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_7 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_8 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_9 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_10 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_11 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROD_12 FIDE_PRODUCTOS_TB.ID_PRODUCTO%TYPE;
+    V_PROV_1 FIDE_PROVEEDORES_TB.ID_PROVEEDOR%TYPE;
+    V_PROV_2 FIDE_PROVEEDORES_TB.ID_PROVEEDOR%TYPE;
+    V_PROV_3 FIDE_PROVEEDORES_TB.ID_PROVEEDOR%TYPE;
+    V_PROV_4 FIDE_PROVEEDORES_TB.ID_PROVEEDOR%TYPE;
+    V_PROV_5 FIDE_PROVEEDORES_TB.ID_PROVEEDOR%TYPE;
+    V_EMP_1 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_2 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_3 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_4 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_5 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_6 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_EMP_7 FIDE_EMPLEADOS_TB.ID_EMPLEADO%TYPE;
+    V_PAGO_1 FIDE_TIPOS_PAGO_TB.ID_TIPO_PAGO%TYPE;
+    V_PAGO_2 FIDE_TIPOS_PAGO_TB.ID_TIPO_PAGO%TYPE;
+    V_PAGO_3 FIDE_TIPOS_PAGO_TB.ID_TIPO_PAGO%TYPE;
+    V_PAGO_4 FIDE_TIPOS_PAGO_TB.ID_TIPO_PAGO%TYPE;
+    V_VENTA_1 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_VENTA_2 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_VENTA_3 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_VENTA_4 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_VENTA_5 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_VENTA_6 FIDE_VENTAS_TB.ID_VENTA%TYPE;
+    V_MOV_AJUSTE FIDE_MOVIMIENTOS_INVENTARIO_TB.ID_MOVIMIENTO%TYPE;
+BEGIN
+    SAVEPOINT CARGA_INICIAL;
+    SELECT SUM(CANTIDAD) INTO V_TOTAL
+    FROM (
+        SELECT COUNT(*) CANTIDAD FROM FIDE_SOCIOS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_TIPOS_MEMBRESIA_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_MEMBRESIAS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_CATEGORIAS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_PRODUCTOS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_PROVEEDORES_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_PROVEEDORES_PRODUCTOS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_INVENTARIOS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_EMPLEADOS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_USUARIOS_SISTEMA_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_TIPOS_PAGO_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_VENTAS_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_DETALLES_VENTA_TB
+        UNION ALL SELECT COUNT(*) CANTIDAD FROM FIDE_MOVIMIENTOS_INVENTARIO_TB
+    );
+    IF V_TOTAL > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'La carga requiere que las 14 tablas esten vacias.');
+    END IF;
+
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S001',
+        'Mariana',
+        'Solano Prado',
+        'socio01@example.invalid',
+        ADD_MONTHS(V_HOY, -15),
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_1;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S002',
+        'Andres',
+        'Mora Vega',
+        'socio02@example.invalid',
+        ADD_MONTHS(V_HOY, -4),
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_2;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S003',
+        'Camila',
+        'Rojas Soto',
+        'socio03@example.invalid',
+        ADD_MONTHS(V_HOY, -7),
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_3;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S004',
+        'Diego',
+        'Vargas Leon',
+        'socio04@example.invalid',
+        ADD_MONTHS(V_HOY, -15),
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_4;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S005',
+        'Valeria',
+        'Campos Arias',
+        'socio05@example.invalid',
+        ADD_MONTHS(V_HOY, -5),
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_5;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S006',
+        'Gabriel',
+        'Paz Nunez',
+        'socio06@example.invalid',
+        ADD_MONTHS(V_HOY, -3),
+        'INACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_6;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S007',
+        'Lucia',
+        'Vega Flores',
+        'socio07@example.invalid',
+        V_HOY - 10,
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_7;
+    INSERT INTO FIDE_SOCIOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CORREO,
+        FECHA_REGISTRO, ESTADO
+    ) VALUES (
+        'TEST-S008',
+        'Mateo',
+        'Reyes Luna',
+        'socio08@example.invalid',
+        V_HOY - 2,
+        'ACTIVO'
+    ) RETURNING ID_SOCIO INTO V_SOCIO_8;
+
+    INSERT INTO FIDE_TIPOS_MEMBRESIA_TB (
+        NOMBRE, DURACION_MESES, PRECIO
+    ) VALUES (
+        'Individual anual',
+        12,
+        15000
+    ) RETURNING ID_TIPO_MEMBRESIA INTO V_TIPO_MEM_1;
+    INSERT INTO FIDE_TIPOS_MEMBRESIA_TB (
+        NOMBRE, DURACION_MESES, PRECIO
+    ) VALUES (
+        'Familiar anual',
+        12,
+        22000
+    ) RETURNING ID_TIPO_MEMBRESIA INTO V_TIPO_MEM_2;
+    INSERT INTO FIDE_TIPOS_MEMBRESIA_TB (
+        NOMBRE, DURACION_MESES, PRECIO
+    ) VALUES (
+        'Empresarial anual',
+        12,
+        35000
+    ) RETURNING ID_TIPO_MEMBRESIA INTO V_TIPO_MEM_3;
+
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_1,
+        V_TIPO_MEM_1,
+        ADD_MONTHS(V_HOY, -15),
+        ADD_MONTHS(V_HOY, -3),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_1,
+        V_TIPO_MEM_1,
+        ADD_MONTHS(V_HOY, -3),
+        ADD_MONTHS(V_HOY, 9),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_2,
+        V_TIPO_MEM_2,
+        ADD_MONTHS(V_HOY, -4),
+        ADD_MONTHS(V_HOY, 8),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_3,
+        V_TIPO_MEM_3,
+        ADD_MONTHS(V_HOY, -7),
+        ADD_MONTHS(V_HOY, 5),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_4,
+        V_TIPO_MEM_1,
+        ADD_MONTHS(V_HOY, -15),
+        ADD_MONTHS(V_HOY, -3),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_5,
+        V_TIPO_MEM_2,
+        ADD_MONTHS(V_HOY, -5),
+        ADD_MONTHS(V_HOY, 7),
+        'CANCELADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_6,
+        V_TIPO_MEM_1,
+        ADD_MONTHS(V_HOY, -3),
+        ADD_MONTHS(V_HOY, 9),
+        'REGISTRADA'
+    );
+    INSERT INTO FIDE_MEMBRESIAS_TB (
+        ID_SOCIO, ID_TIPO_MEMBRESIA, FECHA_INICIO, FECHA_VENCIMIENTO,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_7,
+        V_TIPO_MEM_1,
+        V_HOY + 5,
+        ADD_MONTHS(V_HOY + 5, 12),
+        'REGISTRADA'
+    );
+
+    INSERT INTO FIDE_CATEGORIAS_TB (
+        NOMBRE, DESCRIPCION
+    ) VALUES (
+        'Alimentos',
+        'Productos de consumo y despensa'
+    ) RETURNING ID_CATEGORIA INTO V_CAT_1;
+    INSERT INTO FIDE_CATEGORIAS_TB (
+        NOMBRE, DESCRIPCION
+    ) VALUES (
+        'Bebidas',
+        'Bebidas sin alcohol'
+    ) RETURNING ID_CATEGORIA INTO V_CAT_2;
+    INSERT INTO FIDE_CATEGORIAS_TB (
+        NOMBRE, DESCRIPCION
+    ) VALUES (
+        'Limpieza',
+        'Articulos de limpieza del hogar'
+    ) RETURNING ID_CATEGORIA INTO V_CAT_3;
+    INSERT INTO FIDE_CATEGORIAS_TB (
+        NOMBRE, DESCRIPCION
+    ) VALUES (
+        'Cuidado personal',
+        'Productos de higiene personal'
+    ) RETURNING ID_CATEGORIA INTO V_CAT_4;
+    INSERT INTO FIDE_CATEGORIAS_TB (
+        NOMBRE, DESCRIPCION
+    ) VALUES (
+        'Hogar',
+        'Articulos de uso domestico'
+    ) RETURNING ID_CATEGORIA INTO V_CAT_5;
+
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_1,
+        'TEST-P001',
+        'Arroz 5 kg',
+        6500,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_1;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_1,
+        'TEST-P002',
+        'Frijoles 2 kg',
+        3200,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_2;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_1,
+        'TEST-P003',
+        'Aceite vegetal 3 L',
+        5400,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_3;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_2,
+        'TEST-P004',
+        'Agua 12 botellas',
+        4200,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_4;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_2,
+        'TEST-P005',
+        'Jugo 6 unidades',
+        3900,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_5;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_3,
+        'TEST-P006',
+        'Detergente 4 kg',
+        7800,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_6;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_3,
+        'TEST-P007',
+        'Desinfectante 2 L',
+        3500,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_7;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_4,
+        'TEST-P008',
+        'Jabon 6 unidades',
+        2800,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_8;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_4,
+        'TEST-P009',
+        'Pasta dental 3 unidades',
+        3100,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_9;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_5,
+        'TEST-P010',
+        'Papel higienico 12 rollos',
+        5600,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_10;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_5,
+        'TEST-P011',
+        'Bolsas de basura 30 unidades',
+        2400,
+        'ACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_11;
+    INSERT INTO FIDE_PRODUCTOS_TB (
+        ID_CATEGORIA, CODIGO_PRODUCTO, NOMBRE, PRECIO_VENTA,
+        ESTADO
+    ) VALUES (
+        V_CAT_5,
+        'TEST-P012',
+        'Esponjas 4 unidades',
+        1500,
+        'INACTIVO'
+    ) RETURNING ID_PRODUCTO INTO V_PROD_12;
+
+    INSERT INTO FIDE_PROVEEDORES_TB (
+        NOMBRE, CORREO, CONTACTO, ESTADO
+    ) VALUES (
+        'Distribuidora Valle Azul',
+        'proveedor01@example.invalid',
+        'Rosa Prado',
+        'ACTIVO'
+    ) RETURNING ID_PROVEEDOR INTO V_PROV_1;
+    INSERT INTO FIDE_PROVEEDORES_TB (
+        NOMBRE, CORREO, CONTACTO, ESTADO
+    ) VALUES (
+        'Bebidas Horizonte',
+        'proveedor02@example.invalid',
+        'Luis Monte',
+        'ACTIVO'
+    ) RETURNING ID_PROVEEDOR INTO V_PROV_2;
+    INSERT INTO FIDE_PROVEEDORES_TB (
+        NOMBRE, CORREO, CONTACTO, ESTADO
+    ) VALUES (
+        'Limpieza Brisa',
+        'proveedor03@example.invalid',
+        'Elena Sol',
+        'ACTIVO'
+    ) RETURNING ID_PROVEEDOR INTO V_PROV_3;
+    INSERT INTO FIDE_PROVEEDORES_TB (
+        NOMBRE, CORREO, CONTACTO, ESTADO
+    ) VALUES (
+        'Hogar Roble',
+        'proveedor04@example.invalid',
+        'Pablo Rio',
+        'ACTIVO'
+    ) RETURNING ID_PROVEEDOR INTO V_PROV_4;
+    INSERT INTO FIDE_PROVEEDORES_TB (
+        NOMBRE, CORREO, CONTACTO, ESTADO
+    ) VALUES (
+        'Suministros Nube',
+        'proveedor05@example.invalid',
+        'Sara Lago',
+        'INACTIVO'
+    ) RETURNING ID_PROVEEDOR INTO V_PROV_5;
+
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_1,
+        V_PROD_1,
+        4900,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_1,
+        V_PROD_2,
+        2300,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_1,
+        V_PROD_3,
+        4000,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_2,
+        V_PROD_4,
+        2900,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_2,
+        V_PROD_5,
+        2800,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_3,
+        V_PROD_6,
+        5700,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_3,
+        V_PROD_7,
+        2500,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_3,
+        V_PROD_8,
+        1800,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_3,
+        V_PROD_9,
+        2300,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_4,
+        V_PROD_10,
+        4200,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_4,
+        V_PROD_11,
+        1700,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_4,
+        V_PROD_12,
+        950,
+        NULL
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_4,
+        V_PROD_7,
+        2600,
+        V_HOY - 60
+    );
+    INSERT INTO FIDE_PROVEEDORES_PRODUCTOS_TB (
+        ID_PROVEEDOR, ID_PRODUCTO, PRECIO_COMPRA, FECHA_ULTIMA_COMPRA
+    ) VALUES (
+        V_PROV_5,
+        V_PROD_1,
+        5000,
+        NULL
+    );
+
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_1,
+        10
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_2,
+        8
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_3,
+        5
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_4,
+        10
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_5,
+        8
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_6,
+        6
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_7,
+        5
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_8,
+        5
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_9,
+        5
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_10,
+        8
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_11,
+        6
+    );
+    INSERT INTO FIDE_INVENTARIOS_TB (
+        ID_PRODUCTO, CANTIDAD_MINIMA
+    ) VALUES (
+        V_PROD_12,
+        3
+    );
+
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E001',
+        'Andrea',
+        'Alba Mar',
+        'Administrador del sistema',
+        'empleado01@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_1;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E002',
+        'Daniel',
+        'Bosque Sol',
+        'Administrador comercial',
+        'empleado02@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_2;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E003',
+        'Paula',
+        'Luna Rio',
+        'Cajera',
+        'empleado03@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_3;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E004',
+        'Marco',
+        'Sierra Paz',
+        'Bodeguero',
+        'empleado04@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_4;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E005',
+        'Sofia',
+        'Valle Luz',
+        'Encargada de compras',
+        'empleado05@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_5;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E006',
+        'Ivan',
+        'Prado Lago',
+        'Atencion al cliente',
+        'empleado06@example.invalid',
+        'ACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_6;
+    INSERT INTO FIDE_EMPLEADOS_TB (
+        IDENTIFICACION, NOMBRE, APELLIDOS, CARGO,
+        CORREO, ESTADO
+    ) VALUES (
+        'TEST-E007',
+        'Laura',
+        'Campo Nube',
+        'Cajera',
+        'empleado07@example.invalid',
+        'INACTIVO'
+    ) RETURNING ID_EMPLEADO INTO V_EMP_7;
+
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_1,
+        'prueba_admin_sistema',
+        'pbkdf2:sha256:600000$fd3ffd31e72c84dc9e18ab598d3ff754$f44209a940ecbbeb38b4092b1f8da522567371ca9d78a4865b7c21da95993820',
+        'ADMIN_SISTEMA',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_2,
+        'prueba_administracion',
+        'pbkdf2:sha256:600000$cd73d9b1a90573d356f95551a52c0432$6a72d9a7e274bb9456f21d1da87a36ff4b4ea480ecc18da755624de07bc9f002',
+        'ADMINISTRACION',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_3,
+        'prueba_cajas',
+        'pbkdf2:sha256:600000$38f3a67cd61b41988deb311d3a402947$f175208336077821929051f5e53c90de70aa105cde4ad8b26cd8d6fd6ed7560e',
+        'CAJAS',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_4,
+        'prueba_bodega',
+        'pbkdf2:sha256:600000$84f877b6df3ed9000bd3db897dc1fd48$6cb8ba0de0581481077334a6e5d75a01f952b5c9f237d4f2cf7085436ace6ffc',
+        'BODEGA',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_5,
+        'prueba_compras',
+        'pbkdf2:sha256:600000$4657a2327e0d9b5b397a429250b2931e$713874673d3ca02e896143ffa0c687e7d2f1880c5edb8ed74808d1bf9cd2682e',
+        'COMPRAS',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_6,
+        'prueba_atencion_cliente',
+        'pbkdf2:sha256:600000$80d5bd839e42dd99b8ea6567700ba88e$504670f50b6767aae5a4f3282039503cbc24129f6aa09e28c8f5f1e469c632c7',
+        'ATENCION_CLIENTE',
+        'ACTIVO'
+    );
+    INSERT INTO FIDE_USUARIOS_SISTEMA_TB (
+        ID_EMPLEADO, NOMBRE_USUARIO, HASH_CLAVE, ROL,
+        ESTADO
+    ) VALUES (
+        V_EMP_7,
+        'prueba_cajas_inactivo',
+        'pbkdf2:sha256:600000$c0c9416d6041f468dd24ca1b8fbf1632$e0e513acd206d2768498dd9f5c5e21d097785cf66d0ed0bfef3093e388c9f316',
+        'CAJAS',
+        'INACTIVO'
+    );
+
+    INSERT INTO FIDE_TIPOS_PAGO_TB (
+        NOMBRE, ESTADO
+    ) VALUES (
+        'Efectivo',
+        'ACTIVO'
+    ) RETURNING ID_TIPO_PAGO INTO V_PAGO_1;
+    INSERT INTO FIDE_TIPOS_PAGO_TB (
+        NOMBRE, ESTADO
+    ) VALUES (
+        'Tarjeta',
+        'ACTIVO'
+    ) RETURNING ID_TIPO_PAGO INTO V_PAGO_2;
+    INSERT INTO FIDE_TIPOS_PAGO_TB (
+        NOMBRE, ESTADO
+    ) VALUES (
+        'Transferencia',
+        'ACTIVO'
+    ) RETURNING ID_TIPO_PAGO INTO V_PAGO_3;
+    INSERT INTO FIDE_TIPOS_PAGO_TB (
+        NOMBRE, ESTADO
+    ) VALUES (
+        'Cheque',
+        'INACTIVO'
+    ) RETURNING ID_TIPO_PAGO INTO V_PAGO_4;
+
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO, FECHA_CONFIRMACION
+    ) VALUES (
+        V_SOCIO_1,
+        V_EMP_3,
+        V_PAGO_1,
+        V_HOY - 12,
+        'CONFIRMADA',
+        V_HOY - 12 + 10/1440
+    ) RETURNING ID_VENTA INTO V_VENTA_1;
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO, FECHA_CONFIRMACION
+    ) VALUES (
+        V_SOCIO_2,
+        V_EMP_3,
+        V_PAGO_2,
+        V_HOY - 9,
+        'CONFIRMADA',
+        V_HOY - 9 + 10/1440
+    ) RETURNING ID_VENTA INTO V_VENTA_2;
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO, FECHA_CONFIRMACION
+    ) VALUES (
+        V_SOCIO_3,
+        V_EMP_3,
+        V_PAGO_3,
+        V_HOY - 5,
+        'CONFIRMADA',
+        V_HOY - 5 + 10/1440
+    ) RETURNING ID_VENTA INTO V_VENTA_3;
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO, FECHA_CONFIRMACION, ID_EMPLEADO_ANULACION, FECHA_ANULACION,
+        MOTIVO_ANULACION
+    ) VALUES (
+        V_SOCIO_1,
+        V_EMP_3,
+        V_PAGO_2,
+        V_HOY - 3,
+        'ANULADA',
+        V_HOY - 3 + 10/1440,
+        V_EMP_2,
+        V_HOY - 2,
+        'Anulacion solicitada por el socio'
+    ) RETURNING ID_VENTA INTO V_VENTA_4;
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_2,
+        V_EMP_3,
+        V_PAGO_1,
+        V_HOY - 1,
+        'PENDIENTE'
+    ) RETURNING ID_VENTA INTO V_VENTA_5;
+    INSERT INTO FIDE_VENTAS_TB (
+        ID_SOCIO, ID_EMPLEADO, ID_TIPO_PAGO, FECHA_VENTA,
+        ESTADO
+    ) VALUES (
+        V_SOCIO_3,
+        V_EMP_3,
+        V_PAGO_3,
+        V_HOY,
+        'PENDIENTE'
+    ) RETURNING ID_VENTA INTO V_VENTA_6;
+
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_1,
+        V_PROD_1,
+        3,
+        6500
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_1,
+        V_PROD_2,
+        2,
+        3200
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_1,
+        V_PROD_4,
+        2,
+        4200
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_2,
+        V_PROD_5,
+        3,
+        3900
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_2,
+        V_PROD_6,
+        1,
+        7800
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_3,
+        V_PROD_3,
+        2,
+        5400
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_3,
+        V_PROD_8,
+        3,
+        2800
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_3,
+        V_PROD_10,
+        4,
+        5600
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_4,
+        V_PROD_1,
+        2,
+        6500
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_4,
+        V_PROD_7,
+        2,
+        3500
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_5,
+        V_PROD_2,
+        1,
+        3200
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_5,
+        V_PROD_9,
+        2,
+        3100
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_6,
+        V_PROD_4,
+        1,
+        4200
+    );
+    INSERT INTO FIDE_DETALLES_VENTA_TB (
+        ID_VENTA, ID_PRODUCTO, CANTIDAD, PRECIO_UNITARIO
+    ) VALUES (
+        V_VENTA_6,
+        V_PROD_11,
+        1,
+        2400
+    );
+
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_1,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        50,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_2,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        30,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_3,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        20,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_4,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        35,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_5,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        9,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_6,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        26,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_7,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        5,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_8,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        25,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_9,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        18,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_10,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        28,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_11,
+        V_EMP_4,
+        'ENTRADA',
+        'MANUAL',
+        4,
+        V_HOY - 60,
+        'Existencia inicial'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, TIPO_MOVIMIENTO, ORIGEN,
+        CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_6,
+        V_EMP_4,
+        'SALIDA',
+        'MANUAL',
+        2,
+        V_HOY - 25,
+        'Ajuste de bodega'
+    ) RETURNING ID_MOVIMIENTO INTO V_MOV_AJUSTE;
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_MOVIMIENTO_ORIGEN, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_6,
+        V_EMP_4,
+        V_MOV_AJUSTE,
+        'ENTRADA',
+        'REVERSO_MANUAL',
+        2,
+        V_HOY - 24,
+        'Reversion del ajuste de bodega'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_1,
+        V_EMP_3,
+        V_VENTA_1,
+        'SALIDA',
+        'VENTA',
+        3,
+        V_HOY - 12 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_2,
+        V_EMP_3,
+        V_VENTA_1,
+        'SALIDA',
+        'VENTA',
+        2,
+        V_HOY - 12 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_4,
+        V_EMP_3,
+        V_VENTA_1,
+        'SALIDA',
+        'VENTA',
+        2,
+        V_HOY - 12 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_5,
+        V_EMP_3,
+        V_VENTA_2,
+        'SALIDA',
+        'VENTA',
+        3,
+        V_HOY - 9 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_6,
+        V_EMP_3,
+        V_VENTA_2,
+        'SALIDA',
+        'VENTA',
+        1,
+        V_HOY - 9 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_3,
+        V_EMP_3,
+        V_VENTA_3,
+        'SALIDA',
+        'VENTA',
+        2,
+        V_HOY - 5 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_8,
+        V_EMP_3,
+        V_VENTA_3,
+        'SALIDA',
+        'VENTA',
+        3,
+        V_HOY - 5 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_10,
+        V_EMP_3,
+        V_VENTA_3,
+        'SALIDA',
+        'VENTA',
+        4,
+        V_HOY - 5 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_1,
+        V_EMP_3,
+        V_VENTA_4,
+        'SALIDA',
+        'VENTA',
+        2,
+        V_HOY - 3 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_7,
+        V_EMP_3,
+        V_VENTA_4,
+        'SALIDA',
+        'VENTA',
+        2,
+        V_HOY - 3 + 10/1440,
+        'Salida por venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_1,
+        V_EMP_2,
+        V_VENTA_4,
+        'ENTRADA',
+        'ANULACION_VENTA',
+        2,
+        V_HOY - 2,
+        'Reintegro por anulacion de venta'
+    );
+    INSERT INTO FIDE_MOVIMIENTOS_INVENTARIO_TB (
+        ID_PRODUCTO, ID_EMPLEADO, ID_VENTA, TIPO_MOVIMIENTO,
+        ORIGEN, CANTIDAD, FECHA_MOVIMIENTO, OBSERVACION
+    ) VALUES (
+        V_PROD_7,
+        V_EMP_2,
+        V_VENTA_4,
+        'ENTRADA',
+        'ANULACION_VENTA',
+        2,
+        V_HOY - 2,
+        'Reintegro por anulacion de venta'
+    );
+
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Carga completada: 130 registros de prueba en 14 tablas.');
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK TO CARGA_INICIAL;
+        RAISE;
+END;
+/
