@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pem
+*.p12
+*.sso
+*.jks
+Wallet*/
+Wallet*.zip
