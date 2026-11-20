@@ -1,0 +1,1676 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF8" />
+<script src="FIDE_MOVIMIENTOS_INVENTARIO_TB/report.js" type="text/javascript"></script>
+<link href="FIDE_MOVIMIENTOS_INVENTARIO_TB/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">FIDE_MOVIMIENTOS_INVENTARIO_TB</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Columnas</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Restricciones</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Permisos</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>Estadísticas</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Disparadores</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Dependencias</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 6)">
+<div>
+<p>Detalles</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 7)">
+<div>
+<p>Particiones</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 8)">
+<div>
+<p>Índices</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>DATA_TYPE</th>
+<th>NULLABLE</th>
+<th>DATA_DEFAULT</th>
+<th>COLUMN_ID</th>
+<th>COMMENTS</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 0)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO</td>
+<td class="currentcell">NUMBER(10,0)</td>
+<td class="currentcell">No</td>
+<td class="currentcell">"FIDE_CLUB_AHORRO"."ISEQ$$_111292".nextval</td>
+<td class="currentcell">1</td>
+<td class="currentcell">null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 1)">
+<td>ID_PRODUCTO</td>
+<td>NUMBER(10,0)</td>
+<td>No</td>
+<td>null</td>
+<td>2</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 2)">
+<td>ID_EMPLEADO</td>
+<td>NUMBER(10,0)</td>
+<td>No</td>
+<td>null</td>
+<td>3</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 3)">
+<td>ID_VENTA</td>
+<td>NUMBER(10,0)</td>
+<td>Yes</td>
+<td>null</td>
+<td>4</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 4)">
+<td>ID_MOVIMIENTO_ORIGEN</td>
+<td>NUMBER(10,0)</td>
+<td>Yes</td>
+<td>null</td>
+<td>5</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 5)">
+<td>TIPO_MOVIMIENTO</td>
+<td>VARCHAR2(10&nbsp;BYTE)</td>
+<td>No</td>
+<td>null</td>
+<td>6</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 6)">
+<td>ORIGEN</td>
+<td>VARCHAR2(20&nbsp;BYTE)</td>
+<td>No</td>
+<td>'MANUAL'&nbsp;</td>
+<td>7</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 7)">
+<td>CANTIDAD</td>
+<td>NUMBER(10,0)</td>
+<td>No</td>
+<td>null</td>
+<td>8</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 8)">
+<td>FECHA_MOVIMIENTO</td>
+<td>DATE</td>
+<td>No</td>
+<td>SYSDATE&nbsp;</td>
+<td>9</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 9)">
+<td>OBSERVACION</td>
+<td>VARCHAR2(250&nbsp;BYTE)</td>
+<td>Yes</td>
+<td>null</td>
+<td>10</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>CONSTRAINT_NAME</th>
+<th>CONSTRAINT_TYPE</th>
+<th>SEARCH_CONDITION</th>
+<th>R_OWNER</th>
+<th>R_TABLE_NAME</th>
+<th>R_CONSTRAINT_NAME</th>
+<th>DELETE_RULE</th>
+<th>STATUS</th>
+<th>DEFERRABLE</th>
+<th>VALIDATED</th>
+<th>GENERATED</th>
+<th>BAD</th>
+<th>RELY</th>
+<th>LAST_CHANGE</th>
+<th>INDEX_OWNER</th>
+<th>INDEX_NAME</th>
+<th>INVALID</th>
+<th>VIEW_RELATED</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB_CANTIDAD_CK</td>
+<td class="currentcell">Check</td>
+<td class="currentcell">CANTIDAD&nbsp;>&nbsp;0</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">ENABLED</td>
+<td class="currentcell">NOT&nbsp;DEFERRABLE</td>
+<td class="currentcell">VALIDATED</td>
+<td class="currentcell">USER&nbsp;NAME</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">19/11/26</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 1)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_EMPLEADO_FK</td>
+<td>Foreign_Key</td>
+<td>null</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_EMPLEADOS_TB</td>
+<td>FIDE_EMPLEADOS_TB_ID_EMPLEADO_PK</td>
+<td>NO&nbsp;ACTION</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 2)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_ORIGEN_FK</td>
+<td>Foreign_Key</td>
+<td>null</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_PK</td>
+<td>NO&nbsp;ACTION</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 3)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_ORIGEN_UQ</td>
+<td>Unique</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_ORIGEN_UQ</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 4)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_PK</td>
+<td>Primary_Key</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_PK</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 5)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_PRODUCTO_FK</td>
+<td>Foreign_Key</td>
+<td>null</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_INVENTARIOS_TB</td>
+<td>FIDE_INVENTARIOS_TB_ID_PRODUCTO_UQ</td>
+<td>NO&nbsp;ACTION</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 6)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ORIGEN_CK</td>
+<td>Check</td>
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ORIGEN&nbsp;=&nbsp;'MANUAL'&nbsp;AND&nbsp;ID_VENTA&nbsp;IS&nbsp;NULL&nbsp;AND&nbsp;ID_MOVIMIENTO_ORIGEN&nbsp;IS&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;(ORIGEN&nbsp;=&nbsp;'VENTA'&nbsp;AND&nbsp;TIPO_MOVIMIENTO&nbsp;=&nbsp;'SALIDA'&nbsp;AND&nbsp;ID_VENTA&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;AND&nbsp;ID_MOVIMIENTO_ORIGEN&nbsp;IS&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;(ORIGEN&nbsp;=&nbsp;'ANULACION_VENTA'&nbsp;AND&nbsp;TIPO_MOVIMIENTO&nbsp;=&nbsp;'ENTRADA'&nbsp;AND&nbsp;ID_VENTA&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;AND&nbsp;ID_MOVIMIENTO_ORIGEN&nbsp;IS&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;(ORIGEN&nbsp;=&nbsp;'REVERSO_MANUAL'&nbsp;AND&nbsp;ID_VENTA&nbsp;IS&nbsp;NULL&nbsp;AND&nbsp;ID_MOVIMIENTO_ORIGEN&nbsp;IS&nbsp;NOT&nbsp;NULL)
+&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 7)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_REVERSO_CK</td>
+<td>Check</td>
+<td>ID_MOVIMIENTO_ORIGEN&nbsp;&lt;>&nbsp;ID_MOVIMIENTO</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 8)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_TIPO_CK</td>
+<td>Check</td>
+<td>TIPO_MOVIMIENTO&nbsp;IN&nbsp;('ENTRADA',&nbsp;'SALIDA')</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 9)">
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_VENTA_PRODUCTO_FK</td>
+<td>Foreign_Key</td>
+<td>null</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_DETALLES_VENTA_TB</td>
+<td>FIDE_DETALLES_VENTA_TB_VENTA_PRODUCTO_UQ</td>
+<td>NO&nbsp;ACTION</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>USER&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 10)">
+<td>SYS_C0025538</td>
+<td>Check</td>
+<td>"ID_MOVIMIENTO"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 11)">
+<td>SYS_C0025539</td>
+<td>Check</td>
+<td>"ID_PRODUCTO"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 12)">
+<td>SYS_C0025540</td>
+<td>Check</td>
+<td>"ID_EMPLEADO"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 13)">
+<td>SYS_C0025541</td>
+<td>Check</td>
+<td>"TIPO_MOVIMIENTO"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 14)">
+<td>SYS_C0025542</td>
+<td>Check</td>
+<td>"ORIGEN"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 15)">
+<td>SYS_C0025543</td>
+<td>Check</td>
+<td>"CANTIDAD"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 16)">
+<td>SYS_C0025544</td>
+<td>Check</td>
+<td>"FECHA_MOVIMIENTO"&nbsp;IS&nbsp;NOT&nbsp;NULL</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>ENABLED</td>
+<td>NOT&nbsp;DEFERRABLE</td>
+<td>VALIDATED</td>
+<td>GENERATED&nbsp;NAME</td>
+<td>null</td>
+<td>null</td>
+<td>19/11/26</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.1">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Columnas</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.1">
+<div id="Child.0.0.1">
+<div class="currentchildreport"><table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 2)" class="currentrow">
+<td class="currentcell">CANTIDAD</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.1.1">
+<div class="childreport"><table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)" class="currentrow">
+<td class="currentcell">ID_EMPLEADO</td>
+<td class="currentcell">1</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.2.1">
+<div class="childreport"><table id="Table.4" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO_ORIGEN</td>
+<td class="currentcell">1</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.3.1">
+<div class="childreport"><table id="Table.5" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 5)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO_ORIGEN</td>
+<td class="currentcell">1</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.4.1">
+<div class="childreport"><table id="Table.6" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 6)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO</td>
+<td class="currentcell">1</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.5.1">
+<div class="childreport"><table id="Table.7" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 7)" class="currentrow">
+<td class="currentcell">ID_PRODUCTO</td>
+<td class="currentcell">1</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.6.1">
+<div class="childreport"><table id="Table.8" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 8)" class="currentrow">
+<td class="currentcell">ID_VENTA</td>
+<td class="currentcell">null</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 8)">
+<td>ORIGEN</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 8)">
+<td>TIPO_MOVIMIENTO</td>
+<td>null</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 8)">
+<td>ID_MOVIMIENTO_ORIGEN</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.7.1">
+<div class="childreport"><table id="Table.9" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 9)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO_ORIGEN</td>
+<td class="currentcell">null</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 9)">
+<td>ID_MOVIMIENTO</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.8.1">
+<div class="childreport"><table id="Table.10" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 10)" class="currentrow">
+<td class="currentcell">TIPO_MOVIMIENTO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.9.1">
+<div class="childreport"><table id="Table.11" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 11)" class="currentrow">
+<td class="currentcell">ID_VENTA</td>
+<td class="currentcell">1</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 11)">
+<td>ID_PRODUCTO</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.10.1">
+<div class="childreport"><table id="Table.12" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 12)" class="currentrow">
+<td class="currentcell">ID_MOVIMIENTO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.11.1">
+<div class="childreport"><table id="Table.13" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 13)" class="currentrow">
+<td class="currentcell">ID_PRODUCTO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.12.1">
+<div class="childreport"><table id="Table.14" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 14)" class="currentrow">
+<td class="currentcell">ID_EMPLEADO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.13.1">
+<div class="childreport"><table id="Table.15" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 15)" class="currentrow">
+<td class="currentcell">TIPO_MOVIMIENTO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.14.1">
+<div class="childreport"><table id="Table.16" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 16)" class="currentrow">
+<td class="currentcell">ORIGEN</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.15.1">
+<div class="childreport"><table id="Table.17" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 17)" class="currentrow">
+<td class="currentcell">CANTIDAD</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.16.1">
+<div class="childreport"><table id="Table.18" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 18)" class="currentrow">
+<td class="currentcell">FECHA_MOVIMIENTO</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.19" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.20" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>NUM_ROWS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>BLOCKS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>AVG_ROW_LEN</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SAMPLE_SIZE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>LAST_ANALYZED</td>
+<td>null</td>
+</tr>
+<tr>
+<td>LAST_ANALYZED_SINCE</td>
+<td>null</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.3">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Estadísticas de Columna</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.3">
+</div>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.21" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>TRIGGER_NAME</th>
+<th>TRIGGER_TYPE</th>
+<th>TRIGGER_OWNER</th>
+<th>TRIGGERING_EVENT</th>
+<th>STATUS</th>
+<th>TABLE_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 21, 0)" class="currentrow">
+<td class="currentcell">FIDE_MOVIMIENTOS_INV_TRG</td>
+<td class="currentcell">COMPOUND</td>
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">INSERT&nbsp;OR&nbsp;UPDATE&nbsp;OR&nbsp;DELETE</td>
+<td class="currentcell">ENABLED</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.4">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.4">
+<div id="Child.0.0.4">
+<div class="currentchildreport"><pre>
+TRIGGER FIDE_MOVIMIENTOS_INV_TRG
+FOR INSERT OR UPDATE OR DELETE ON FIDE_MOVIMIENTOS_INVENTARIO_TB
+COMPOUND TRIGGER
+    TYPE T_IDS IS TABLE OF NUMBER INDEX BY PLS_INTEGER;
+    G_PRODUCTOS T_IDS;
+    G_MOVIMIENTOS T_IDS;
+    G_N PLS_INTEGER := 0;
+
+    BEFORE EACH ROW IS
+        V_ID NUMBER;
+        V_ESTADO VARCHAR2(15);
+        V_CANTIDAD NUMBER;
+        V_EMPLEADO NUMBER;
+    BEGIN
+        IF UPDATING OR DELETING THEN
+            RAISE_APPLICATION_ERROR(-20029,'El historial de inventario se corrige mediante reversos.');
+        END IF;
+        IF :NEW.ID_VENTA IS NOT NULL THEN
+            SELECT ESTADO,ID_EMPLEADO INTO V_ESTADO,V_EMPLEADO FROM FIDE_VENTAS_TB
+                WHERE ID_VENTA=:NEW.ID_VENTA FOR UPDATE;
+            IF (:NEW.ORIGEN='VENTA' AND (V_ESTADO&lt;>'PENDIENTE' OR V_EMPLEADO&lt;>:NEW.ID_EMPLEADO)) OR
+               (:NEW.ORIGEN='ANULACION_VENTA' AND V_ESTADO&lt;>'CONFIRMADA') THEN
+                RAISE_APPLICATION_ERROR(-20027,'Movimiento incompatible con el estado de la venta.');
+            END IF;
+            SELECT CANTIDAD INTO V_CANTIDAD FROM FIDE_DETALLES_VENTA_TB
+                WHERE ID_VENTA=:NEW.ID_VENTA AND ID_PRODUCTO=:NEW.ID_PRODUCTO;
+            IF V_CANTIDAD&lt;>:NEW.CANTIDAD THEN RAISE_APPLICATION_ERROR(-20028,'Cantidad distinta del detalle.'); END IF;
+        END IF;
+        SELECT ID_INVENTARIO INTO V_ID FROM FIDE_INVENTARIOS_TB WHERE ID_PRODUCTO=:NEW.ID_PRODUCTO FOR UPDATE;
+        IF FIDE_EMPLEADO_ACTIVO_FN(:NEW.ID_EMPLEADO)=0 THEN RAISE_APPLICATION_ERROR(-20017,'Empleado inactivo.'); END IF;
+        G_N:=G_N+1;
+        G_PRODUCTOS(G_N):=:NEW.ID_PRODUCTO;
+        G_MOVIMIENTOS(G_N):=:NEW.ID_MOVIMIENTO;
+    END BEFORE EACH ROW;
+
+    AFTER STATEMENT IS
+        V_M FIDE_MOVIMIENTOS_INVENTARIO_TB%ROWTYPE;
+        V_O FIDE_MOVIMIENTOS_INVENTARIO_TB%ROWTYPE;
+    BEGIN
+        FOR I IN 1..G_N LOOP
+            IF FIDE_STOCK_FN(G_PRODUCTOS(I))&lt;0 THEN RAISE_APPLICATION_ERROR(-20007,'El inventario no puede ser negativo.'); END IF;
+            SELECT * INTO V_M FROM FIDE_MOVIMIENTOS_INVENTARIO_TB WHERE ID_MOVIMIENTO=G_MOVIMIENTOS(I);
+            IF V_M.ORIGEN='REVERSO_MANUAL' THEN
+                SELECT * INTO V_O FROM FIDE_MOVIMIENTOS_INVENTARIO_TB WHERE ID_MOVIMIENTO=V_M.ID_MOVIMIENTO_ORIGEN;
+                IF V_O.ORIGEN&lt;>'MANUAL' OR V_M.ID_PRODUCTO&lt;>V_O.ID_PRODUCTO OR
+                   V_M.CANTIDAD&lt;>V_O.CANTIDAD OR V_M.TIPO_MOVIMIENTO=V_O.TIPO_MOVIMIENTO THEN
+                    RAISE_APPLICATION_ERROR(-20010,'Reverso incompatible con el movimiento original.');
+                END IF;
+            END IF;
+        END LOOP;
+    END AFTER STATEMENT;
+END FIDE_MOVIMIENTOS_INV_TRG;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<table id="Table.22" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 0)" class="currentrow">
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_REGISTRAR_RECEPCION_PA</td>
+<td class="currentcell">PROCEDURE</td>
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td class="currentcell">TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 1)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_CRUD_MOVIMIENTOS_INVENTARIO_PA</td>
+<td>PROCEDURE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 2)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_INVENTARIO_PKG</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 3)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_CURSORES_PKG</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 4)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_VENTAS_TRG</td>
+<td>TRIGGER</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 5)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INV_TRG</td>
+<td>TRIGGER</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 6)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_INVENTARIO_PKG</td>
+<td>PACKAGE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 7)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_CONFIRMAR_VENTA_PA</td>
+<td>PROCEDURE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 8)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_ANULAR_VENTA_PA</td>
+<td>PROCEDURE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 9)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_REVERSAR_MOVIMIENTO_PA</td>
+<td>PROCEDURE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 10)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_CORREGIR_MOVIMIENTO_PA</td>
+<td>PROCEDURE</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 22, 11)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_INVENTARIOS_VW</td>
+<td>VIEW</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>TABLE</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.5">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Referencias</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.5">
+<div id="Child.0.0.5">
+<div class="currentchildreport"><table id="Table.23" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.1.5">
+<div class="childreport"><table id="Table.24" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.2.5">
+<div class="childreport"><table id="Table.25" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.3.5">
+<div class="childreport"><table id="Table.26" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.4.5">
+<div class="childreport"><table id="Table.27" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.5.5">
+<div class="childreport"><table id="Table.28" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.6.5">
+<div class="childreport"><table id="Table.29" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.7.5">
+<div class="childreport"><table id="Table.30" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.8.5">
+<div class="childreport"><table id="Table.31" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.9.5">
+<div class="childreport"><table id="Table.32" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.10.5">
+<div class="childreport"><table id="Table.33" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.11.5">
+<div class="childreport"><table id="Table.34" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="Master.6">
+<div class="masterreport">
+<table id="Table.35" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>19/11/26</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>20/11/26</td>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>FIDE_CLUB_AHORRO</td>
+</tr>
+<tr>
+<td>TABLE_NAME</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+</tr>
+<tr>
+<td>TABLESPACE_NAME</td>
+<td>DATA</td>
+</tr>
+<tr>
+<td>CLUSTER_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>IOT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>PCT_FREE</td>
+<td>10</td>
+</tr>
+<tr>
+<td>PCT_USED</td>
+<td>null</td>
+</tr>
+<tr>
+<td>INI_TRANS</td>
+<td>10</td>
+</tr>
+<tr>
+<td>MAX_TRANS</td>
+<td>255</td>
+</tr>
+<tr>
+<td>INITIAL_EXTENT</td>
+<td>65536</td>
+</tr>
+<tr>
+<td>NEXT_EXTENT</td>
+<td>1048576</td>
+</tr>
+<tr>
+<td>MIN_EXTENTS</td>
+<td>1</td>
+</tr>
+<tr>
+<td>MAX_EXTENTS</td>
+<td>2147483645</td>
+</tr>
+<tr>
+<td>PCT_INCREASE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>FREELISTS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>FREELIST_GROUPS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>LOGGING</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>BACKED_UP</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NUM_ROWS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>BLOCKS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>EMPTY_BLOCKS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>AVG_SPACE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>CHAIN_CNT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>AVG_ROW_LEN</td>
+<td>null</td>
+</tr>
+<tr>
+<td>AVG_SPACE_FREELIST_BLOCKS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>NUM_FREELIST_BLOCKS</td>
+<td>null</td>
+</tr>
+<tr>
+<td>DEGREE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>INSTANCES</td>
+<td>1</td>
+</tr>
+<tr>
+<td>CACHE</td>
+<td>N</td>
+</tr>
+<tr>
+<td>TABLE_LOCK</td>
+<td>ENABLED</td>
+</tr>
+<tr>
+<td>SAMPLE_SIZE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>LAST_ANALYZED</td>
+<td>null</td>
+</tr>
+<tr>
+<td>PARTITIONED</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>IOT_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TABLE_TYPE_OWNER</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TABLE_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NESTED</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>BUFFER_POOL</td>
+<td>DEFAULT</td>
+</tr>
+<tr>
+<td>ROW_MOVEMENT</td>
+<td>DISABLED</td>
+</tr>
+<tr>
+<td>GLOBAL_STATS</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>USER_STATS</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>DURATION</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SKIP_CORRUPT</td>
+<td>DISABLED</td>
+</tr>
+<tr>
+<td>MONITORING</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>CLUSTER_OWNER</td>
+<td>null</td>
+</tr>
+<tr>
+<td>DEPENDENCIES</td>
+<td>DISABLED</td>
+</tr>
+<tr>
+<td>COMPRESSION</td>
+<td>DISABLED</td>
+</tr>
+<tr>
+<td>COMPRESS_FOR</td>
+<td>null</td>
+</tr>
+<tr>
+<td>DROPPED</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>TABLE_KIND</td>
+<td>NORMAL</td>
+</tr>
+<tr>
+<td>PARTITIONING_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SUBPARTITIONING_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>AUTOLIST</td>
+<td>null</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>COMMENTS</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.7">
+<div class="masterreport">
+<table id="Table.36" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PARTITION_NAME</th>
+<th>LAST_ANALYZED</th>
+<th>NUM_ROWS</th>
+<th>BLOCKS</th>
+<th>SAMPLE_SIZE</th>
+<th>HIGH_VALUE</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.7">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.7">
+</div>
+</div>
+</div>
+<div id="Master.8">
+<div class="masterreport">
+<table id="Table.37" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>INDEX_OWNER</th>
+<th>INDEX_NAME</th>
+<th>UNIQUENESS</th>
+<th>STATUS</th>
+<th>INDEX_TYPE</th>
+<th>TEMPORARY</th>
+<th>PARTITIONED</th>
+<th>FUNCIDX_STATUS</th>
+<th>JOIN_INDEX</th>
+<th>COLUMNS</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 37, 0)" class="currentrow">
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOV_INV_VENTA_ORIGEN_UQ</td>
+<td class="currentcell">UNIQUE</td>
+<td class="currentcell">VALID</td>
+<td class="currentcell">FUNCTION-BASED&nbsp;NORMAL</td>
+<td class="currentcell">N</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">ENABLED</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">SYS_NC00011$,&nbsp;SYS_NC00012$,&nbsp;SYS_NC00013$</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 37, 1)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_PK</td>
+<td>UNIQUE</td>
+<td>VALID</td>
+<td>NORMAL</td>
+<td>N</td>
+<td>NO</td>
+<td>null</td>
+<td>NO</td>
+<td>ID_MOVIMIENTO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 37, 2)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_ORIGEN_UQ</td>
+<td>UNIQUE</td>
+<td>VALID</td>
+<td>NORMAL</td>
+<td>N</td>
+<td>NO</td>
+<td>null</td>
+<td>NO</td>
+<td>ID_MOVIMIENTO_ORIGEN</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.8">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.8">
+<div id="Child.0.0.8">
+<div class="currentchildreport"><table id="Table.38" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>INDEX_OWNER</th>
+<th>INDEX_NAME</th>
+<th>TABLE_OWNER</th>
+<th>TABLE_NAME</th>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+<th>COLUMN_LENGTH</th>
+<th>CHAR_LENGTH</th>
+<th>DESCEND</th>
+<th>COLLATED_COLUMN_ID</th>
+<th>COLUMN_EXPRESSION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 38)" class="currentrow">
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOV_INV_VENTA_ORIGEN_UQ</td>
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td class="currentcell">SYS_NC00011$</td>
+<td class="currentcell">1</td>
+<td class="currentcell">22</td>
+<td class="currentcell">0</td>
+<td class="currentcell">ASC</td>
+<td class="currentcell">null</td>
+<td class="currentcell">CASE&nbsp;&nbsp;WHEN&nbsp;"ID_VENTA"&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;THEN&nbsp;"ID_VENTA"&nbsp;END&nbsp;</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 38)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOV_INV_VENTA_ORIGEN_UQ</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>SYS_NC00012$</td>
+<td>2</td>
+<td>22</td>
+<td>0</td>
+<td>ASC</td>
+<td>null</td>
+<td>CASE&nbsp;&nbsp;WHEN&nbsp;"ID_VENTA"&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;THEN&nbsp;"ID_PRODUCTO"&nbsp;END&nbsp;</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 38)">
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOV_INV_VENTA_ORIGEN_UQ</td>
+<td>FIDE_CLUB_AHORRO</td>
+<td>FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td>SYS_NC00013$</td>
+<td>3</td>
+<td>20</td>
+<td>20</td>
+<td>ASC</td>
+<td>null</td>
+<td>CASE&nbsp;&nbsp;WHEN&nbsp;"ID_VENTA"&nbsp;IS&nbsp;NOT&nbsp;NULL&nbsp;THEN&nbsp;"ORIGEN"&nbsp;END&nbsp;</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.1.8">
+<div class="childreport"><table id="Table.39" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>INDEX_OWNER</th>
+<th>INDEX_NAME</th>
+<th>TABLE_OWNER</th>
+<th>TABLE_NAME</th>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+<th>COLUMN_LENGTH</th>
+<th>CHAR_LENGTH</th>
+<th>DESCEND</th>
+<th>COLLATED_COLUMN_ID</th>
+<th>COLUMN_EXPRESSION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 39)" class="currentrow">
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_PK</td>
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td class="currentcell">ID_MOVIMIENTO</td>
+<td class="currentcell">1</td>
+<td class="currentcell">22</td>
+<td class="currentcell">0</td>
+<td class="currentcell">ASC</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.2.8">
+<div class="childreport"><table id="Table.40" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>INDEX_OWNER</th>
+<th>INDEX_NAME</th>
+<th>TABLE_OWNER</th>
+<th>TABLE_NAME</th>
+<th>COLUMN_NAME</th>
+<th>COLUMN_POSITION</th>
+<th>COLUMN_LENGTH</th>
+<th>CHAR_LENGTH</th>
+<th>DESCEND</th>
+<th>COLLATED_COLUMN_ID</th>
+<th>COLUMN_EXPRESSION</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 40)" class="currentrow">
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB_ID_MOVIMIENTO_ORIGEN_UQ</td>
+<td class="currentcell">FIDE_CLUB_AHORRO</td>
+<td class="currentcell">FIDE_MOVIMIENTOS_INVENTARIO_TB</td>
+<td class="currentcell">ID_MOVIMIENTO_ORIGEN</td>
+<td class="currentcell">1</td>
+<td class="currentcell">22</td>
+<td class="currentcell">0</td>
+<td class="currentcell">ASC</td>
+<td class="currentcell">null</td>
+<td class="currentcell">null</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
